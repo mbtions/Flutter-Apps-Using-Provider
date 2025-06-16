@@ -25,7 +25,7 @@ class FitnessTrackerApp extends StatelessWidget {
         title: 'Fitness Tracker App',
         debugShowCheckedModeBanner: false,
         home: HomeScreen(),
-        theme: myAppLightTheme,
+        theme: myAppTheme,
       ),
     );
   }
