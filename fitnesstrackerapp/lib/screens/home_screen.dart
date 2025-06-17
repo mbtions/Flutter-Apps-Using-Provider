@@ -2,6 +2,7 @@ import 'package:fitnesstrackerapp/model/workout.dart';
 import 'package:fitnesstrackerapp/screens/add_workout_screen.dart';
 import 'package:fitnesstrackerapp/screens/bmi_screen.dart';
 import 'package:fitnesstrackerapp/screens/summary_screen.dart';
+import 'package:fitnesstrackerapp/theme/app_colors.dart';
 import 'package:fitnesstrackerapp/widgets/workout_list.dart';
 import 'package:provider/provider.dart';
 import 'package:fitnesstrackerapp/providers/workout_provider.dart';
@@ -18,6 +19,7 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> {
   int currentPageIndex = 0;
+  FitnessCategory? selectedCategory;
 
   void _onAddNewWorkoutPress() {
     Navigator.of(
@@ -43,6 +45,22 @@ class HomeScreenState extends State<HomeScreen> {
             ).insertWorkoutAt(index, workout);
           },
         ),
+      ),
+    );
+  }
+
+  // Function to build the dropdown label with the category icon and name
+  Widget buildDropdownLabel(
+    String filteredCategory, {
+    bool isSelected = false,
+  }) {
+    return Text(
+      // capitalize the first letter of the category name
+      filteredCategory[0].toUpperCase() + filteredCategory.substring(1),
+      style: TextStyle(
+        color: isSelected ? Color(0xFFB76D68) : Colors.white,
+        fontSize: 16,
+        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
       ),
     );
   }
@@ -92,22 +110,155 @@ class HomeScreenState extends State<HomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: 20),
-                        Text(
-                          'Your Workouts',
-                          style: TextStyle(fontSize: 24, color: Colors.white),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'Your Workouts',
+                              style: TextStyle(
+                                fontSize: 24,
+                                color: AppColors.kDarkTextColor,
+                              ),
+                            ),
+                            LayoutBuilder(
+                              builder: (context, constraints) {
+                                final double parentWidth = constraints.maxWidth;
+                                return Theme(
+                                  data: Theme.of(context).copyWith(
+                                    dropdownMenuTheme: DropdownMenuThemeData(
+                                      textStyle: TextStyle(
+                                        color: AppColors.kDarkTextColor,
+                                      ),
+                                      inputDecorationTheme:
+                                          InputDecorationTheme(
+                                            suffixIconColor:
+                                                AppColors.kDarkTextColor,
+                                            enabledBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(30),
+                                              ),
+                                              borderSide: BorderSide(
+                                                color: AppColors.kDarkTextColor,
+                                                width: 1,
+                                              ),
+                                            ),
+                                            focusedBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(30),
+                                              ),
+                                              borderSide: BorderSide(
+                                                color: Color(0xFFB76D68),
+                                                width: 2,
+                                              ),
+                                            ),
+                                            labelStyle: TextStyle(
+                                              color: AppColors.kDarkTextColor,
+                                            ),
+                                          ),
+                                      menuStyle: MenuStyle(
+                                        backgroundColor:
+                                            WidgetStateProperty.all(
+                                              const Color(0xFF2C2B3C),
+                                            ),
+                                        shape: WidgetStateProperty.all(
+                                          RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(10),
+                                            ),
+                                          ),
+                                        ),
+                                        maximumSize: WidgetStateProperty.all(
+                                          Size(
+                                            parentWidth,
+                                            double.infinity,
+                                          ), // Match parent width
+                                        ),
+                                        elevation: WidgetStateProperty.all(5),
+                                      ),
+                                    ),
+                                  ),
+                                  child: DropdownMenu<FitnessCategory?>(
+                                    width: 160,
+                                    initialSelection: null,
+                                    trailingIcon: Icon(Icons.filter_list),
+                                    // label: const Text('Filter Category'),
+                                    dropdownMenuEntries: [
+                                      DropdownMenuEntry(
+                                        value: null,
+                                        label: 'All',
+                                        labelWidget: buildDropdownLabel("All"),
+                                      ),
+                                      DropdownMenuEntry(
+                                        value: FitnessCategory.strength,
+                                        label: 'Strength',
+                                        labelWidget: buildDropdownLabel(
+                                          FitnessCategory.strength.name,
+                                        ),
+                                      ),
+                                      DropdownMenuEntry(
+                                        value: FitnessCategory.cardio,
+                                        label: 'Cardio',
+                                        labelWidget: buildDropdownLabel(
+                                          FitnessCategory.cardio.name,
+                                        ),
+                                      ),
+                                      DropdownMenuEntry(
+                                        value: FitnessCategory.flexibility,
+                                        label: 'Flexibility',
+                                        labelWidget: buildDropdownLabel(
+                                          FitnessCategory.flexibility.name,
+                                        ),
+                                      ),
+                                      DropdownMenuEntry(
+                                        value: FitnessCategory.balance,
+                                        label: 'Balance',
+                                        labelWidget: buildDropdownLabel(
+                                          FitnessCategory.balance.name,
+                                        ),
+                                      ),
+                                      DropdownMenuEntry(
+                                        value: FitnessCategory.yoga,
+                                        label: 'Yoga',
+                                        labelWidget: buildDropdownLabel(
+                                          FitnessCategory.yoga.name,
+                                        ),
+                                      ),
+                                      DropdownMenuEntry(
+                                        value: FitnessCategory.other,
+                                        label: 'Other',
+                                        labelWidget: buildDropdownLabel(
+                                          FitnessCategory.other.name,
+                                          isSelected: true,
+                                        ),
+                                      ),
+                                    ],
+                                    onSelected: (value) {
+                                      setState(() {
+                                        selectedCategory = value;
+                                      });
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
                         ),
                         SizedBox(height: 10),
                         Expanded(
                           child: WorkoutList(
-                            workouts: workoutProvider.workouts,
+                            workouts: selectedCategory == null
+                                ? workoutProvider.workouts
+                                : workoutProvider.workouts
+                                      .where(
+                                        (w) => w.category == selectedCategory,
+                                      )
+                                      .toList(),
                             onRemoveWorkout: _removeWorkout,
                           ),
                         ),
                       ],
                     ),
                   ),
-
-            //
             floatingActionButton: FloatingActionButton(
               onPressed: _onAddNewWorkoutPress,
               backgroundColor: const Color(0xFFB76D68),

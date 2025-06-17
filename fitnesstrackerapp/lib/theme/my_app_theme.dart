@@ -11,10 +11,10 @@ final ThemeData myAppTheme = ThemeData().copyWith(
   ),
   colorScheme: ColorScheme.fromSwatch().copyWith(secondary: AppColors.kPrimary),
   textTheme: const TextTheme(
-    bodyLarge: TextStyle(color: Colors.white, fontSize: 16),
+    bodyLarge: TextStyle(color: AppColors.kDarkTextColor, fontSize: 16),
     bodyMedium: TextStyle(color: Colors.white70, fontSize: 14),
   ),
-  iconTheme: const IconThemeData(color: Colors.white, size: 24),
+  iconTheme: const IconThemeData(color: AppColors.kDarkTextColor, size: 24),
   cardTheme: CardThemeData(
     color: AppColors.darkCard,
     margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -29,10 +29,10 @@ final ThemeData myAppTheme = ThemeData().copyWith(
       fontWeight: FontWeight.bold,
     ),
     counterStyle: TextStyle(color: Colors.white70),
-    labelStyle: TextStyle(color: Colors.white),
+    labelStyle: TextStyle(color: AppColors.kDarkTextColor),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(10)),
-      borderSide: BorderSide(color: Colors.white, width: 1),
+      borderSide: BorderSide(color: AppColors.kDarkBorderColor, width: 1),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -42,7 +42,7 @@ final ThemeData myAppTheme = ThemeData().copyWith(
   navigationBarTheme: NavigationBarThemeData(
     height: 100,
     labelTextStyle: WidgetStateProperty.all(
-      const TextStyle(color: Colors.white, fontSize: 14),
+      const TextStyle(color: AppColors.kDarkTextColor, fontSize: 14),
     ),
     labelPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
     labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
@@ -56,7 +56,7 @@ final ThemeData myAppTheme = ThemeData().copyWith(
   ),
   dialogTheme: const DialogThemeData(
     backgroundColor: AppColors.darkCard,
-    titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
+    titleTextStyle: TextStyle(color: AppColors.kDarkTextColor, fontSize: 20),
     contentTextStyle: TextStyle(color: Colors.white70, fontSize: 16),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
@@ -86,22 +86,25 @@ final ThemeData myAppTheme = ThemeData().copyWith(
     surfaceTintColor: Colors.transparent, // Prevents unexpected color overlays
     // HEADER
     headerBackgroundColor: AppColors.kPrimary,
-    headerForegroundColor: Colors.white,
+    headerForegroundColor: AppColors.kDarkTextColor,
     headerHeadlineStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-    headerHelpStyle: TextStyle(color: Colors.white70, fontSize: 14),
+    headerHelpStyle: TextStyle(color: AppColors.kDarkTextColor70, fontSize: 14),
 
     // DAY STYLE
-    dayStyle: TextStyle(color: Colors.white, fontSize: 16),
-    dayForegroundColor: WidgetStatePropertyAll(Colors.white),
+    dayStyle: TextStyle(color: AppColors.kDarkTextColor, fontSize: 16),
+    dayForegroundColor: WidgetStatePropertyAll(AppColors.kDarkTextColor),
     dayBackgroundColor: WidgetStateProperty.all(Colors.transparent),
 
     // TODAY
-    todayForegroundColor: WidgetStatePropertyAll(Colors.white),
+    todayForegroundColor: WidgetStatePropertyAll(AppColors.kDarkTextColor),
 
     // WEEKDAY & YEAR
-    weekdayStyle: TextStyle(color: Colors.white70, fontWeight: FontWeight.bold),
-    yearStyle: TextStyle(color: Colors.white70),
-    yearForegroundColor: WidgetStatePropertyAll(Colors.white),
+    weekdayStyle: TextStyle(
+      color: AppColors.kDarkTextColor70,
+      fontWeight: FontWeight.bold,
+    ),
+    yearStyle: TextStyle(color: AppColors.kDarkTextColor70),
+    yearForegroundColor: WidgetStatePropertyAll(AppColors.kDarkTextColor),
     yearBackgroundColor: WidgetStatePropertyAll(Colors.transparent),
 
     // SHAPE & BORDER
@@ -110,15 +113,16 @@ final ThemeData myAppTheme = ThemeData().copyWith(
   ),
   dropdownMenuTheme: DropdownMenuThemeData(
     inputDecorationTheme: InputDecorationTheme(
+      suffixIconColor: AppColors.kDarkSuffixIconColor,
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
-        borderSide: BorderSide(color: Colors.white, width: 1),
+        borderSide: BorderSide(color: AppColors.kDarkBorderColor, width: 1),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
-        borderSide: BorderSide(color: Color(0xFFB76D68), width: 2),
+        borderSide: BorderSide(color: AppColors.kPrimary, width: 2),
       ),
-      labelStyle: TextStyle(color: Colors.white),
+      labelStyle: TextStyle(color: AppColors.kDarkTextColor),
     ),
     menuStyle: MenuStyle(
       backgroundColor: WidgetStateProperty.all(AppColors.darkCard),
