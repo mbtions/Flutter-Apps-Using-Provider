@@ -1,3 +1,4 @@
+import 'package:fitnesstrackerapp/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:fitnesstrackerapp/providers/bmi_provider.dart';
 import 'package:provider/provider.dart';
@@ -15,55 +16,6 @@ class BmiScreenState extends State<BmiScreen> {
   TextEditingController heightController = TextEditingController();
   TextEditingController weightController = TextEditingController();
 
-  // double? bmi;
-
-  // calculateBMI() {
-  //   if (heightController.text.isEmpty || weightController.text.isEmpty) {
-  //     showDialog(
-  //       context: context,
-  //       builder: (context) {
-  //         return AlertDialog(
-  //           title: Text('Input Error'),
-  //           content: Text('Please enter both height and weight'),
-  //           actions: [
-  //             TextButton(
-  //               onPressed: () => Navigator.of(context).pop(),
-  //               child: Text('OK'),
-  //             ),
-  //           ],
-  //         );
-  //       },
-  //     );
-  //     return;
-  //   }
-  //   double height =
-  //       double.parse(heightController.text) / 100; // Convert cm to m
-  //   double weight = double.parse(weightController.text);
-  //   setState(() {
-  //     bmi = weight / (height * height);
-  //   });
-  // }
-
-  // conditionBMI(double bmi) {
-  //   if (bmi < 18.5) {
-  //     return Text(
-  //       'Underweight',
-  //       style: TextStyle(fontSize: 24, color: Colors.red),
-  //     );
-  //   } else if (bmi < 24.9) {
-  //     return Text(
-  //       'Normal weight',
-  //       style: TextStyle(fontSize: 24, color: Colors.green),
-  //     );
-  //   } else if (bmi < 29.9) {
-  //     return Text(
-  //       'Overweight',
-  //       style: TextStyle(fontSize: 24, color: Colors.orange),
-  //     );
-  //   } else {
-  //     return Text('Obesity', style: TextStyle(fontSize: 24, color: Colors.red));
-  //   }
-  // }
   Color _getCategoryColor(String category) {
     switch (category) {
       case 'Underweight':
@@ -71,7 +23,7 @@ class BmiScreenState extends State<BmiScreen> {
       case 'Normal':
         return Colors.green;
       case 'Overweight':
-        return Colors.orange;
+        return Colors.yellow;
       case 'Obese':
         return Colors.red;
       default:
@@ -100,12 +52,16 @@ class BmiScreenState extends State<BmiScreen> {
                   SizedBox(height: 10),
                   Text(
                     'Calculate Your BMI',
-                    style: TextStyle(fontSize: 24, color: Colors.white),
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                   SizedBox(height: 10),
                   // Image.asset is used to display an image from the assets folder
-                  Image.asset('assets/images/bmi.png', width: 200, height: 200),
-                  SizedBox(height: 20),
+                  Image.asset(
+                    'assets/images/bmi_2.png',
+                    width: 200,
+                    height: 200,
+                  ),
+                  SizedBox(height: 25),
                   TextField(
                     controller: heightController,
                     decoration: InputDecoration(labelText: 'Height (cm)'),
@@ -156,11 +112,12 @@ class BmiScreenState extends State<BmiScreen> {
                         horizontal: 20,
                         vertical: 12,
                       ),
-                      backgroundColor: Color(0xFFB76D68),
+                      backgroundColor: AppColors.kPrimary,
                     ),
                     child: Text(
                       'Calculate',
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      style: Theme.of(context).textTheme.bodyLarge,
+                      //  TextStyle(color: Colors.white, fontSize: 18),
                     ),
                   ),
                   SizedBox(height: 20),
@@ -194,25 +151,6 @@ class BmiScreenState extends State<BmiScreen> {
                       );
                     },
                   ),
-                  // Column(
-                  //   children: [
-                  //     Text(
-                  //       'Your BMI is:',
-                  //       style: TextStyle(fontSize: 20, color: Colors.white),
-                  //     ),
-                  //     SizedBox(height: 10),
-                  //     Text(
-                  //       bmi!.toStringAsFixed(2),
-                  //       style: TextStyle(
-                  //         fontSize: 30,
-                  //         fontWeight: FontWeight.bold,
-                  //         color: Color(0xFFB76D68),
-                  //       ),
-                  //     ),
-                  //     SizedBox(height: 10),
-                  //     conditionBMI(bmi!),
-                  //   ],
-                  // ),
                 ],
               ),
             ),

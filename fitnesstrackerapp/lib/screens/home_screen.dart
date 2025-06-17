@@ -49,19 +49,12 @@ class HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // Function to build the dropdown label with the category icon and name
-  Widget buildDropdownLabel(
-    String filteredCategory, {
-    bool isSelected = false,
-  }) {
+  // Function to build the dropdown label
+  Widget buildDropdownLabel(String filteredCategory) {
     return Text(
       // capitalize the first letter of the category name
       filteredCategory[0].toUpperCase() + filteredCategory.substring(1),
-      style: TextStyle(
-        color: isSelected ? Color(0xFFB76D68) : Colors.white,
-        fontSize: 16,
-        fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-      ),
+      style: Theme.of(context).textTheme.labelLarge,
     );
   }
 
@@ -95,7 +88,7 @@ class HomeScreenState extends State<HomeScreen> {
                           SizedBox(height: 20),
                           Text(
                             'No workouts registered yet.',
-                            style: TextStyle(fontSize: 24, color: Colors.white),
+                            style: Theme.of(context).textTheme.headlineSmall,
                           ),
                         ],
                       ),
@@ -109,26 +102,23 @@ class HomeScreenState extends State<HomeScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(height: 20),
+                        SizedBox(height: 10),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               'Your Workouts',
-                              style: TextStyle(
-                                fontSize: 24,
-                                color: AppColors.kDarkTextColor,
-                              ),
+                              style: Theme.of(context).textTheme.titleLarge,
                             ),
+                            Spacer(),
                             LayoutBuilder(
                               builder: (context, constraints) {
                                 final double parentWidth = constraints.maxWidth;
                                 return Theme(
                                   data: Theme.of(context).copyWith(
                                     dropdownMenuTheme: DropdownMenuThemeData(
-                                      textStyle: TextStyle(
-                                        color: AppColors.kDarkTextColor,
-                                      ),
+                                      textStyle: Theme.of(
+                                        context,
+                                      ).textTheme.labelLarge,
                                       inputDecorationTheme:
                                           InputDecorationTheme(
                                             suffixIconColor:
@@ -147,7 +137,7 @@ class HomeScreenState extends State<HomeScreen> {
                                                 Radius.circular(30),
                                               ),
                                               borderSide: BorderSide(
-                                                color: Color(0xFFB76D68),
+                                                color: AppColors.kPrimary,
                                                 width: 2,
                                               ),
                                             ),
@@ -178,10 +168,8 @@ class HomeScreenState extends State<HomeScreen> {
                                     ),
                                   ),
                                   child: DropdownMenu<FitnessCategory?>(
-                                    width: 160,
                                     initialSelection: null,
                                     trailingIcon: Icon(Icons.filter_list),
-                                    // label: const Text('Filter Category'),
                                     dropdownMenuEntries: [
                                       DropdownMenuEntry(
                                         value: null,
@@ -228,7 +216,6 @@ class HomeScreenState extends State<HomeScreen> {
                                         label: 'Other',
                                         labelWidget: buildDropdownLabel(
                                           FitnessCategory.other.name,
-                                          isSelected: true,
                                         ),
                                       ),
                                     ],

@@ -21,10 +21,11 @@ class WorkoutCard extends StatelessWidget {
                   Text(
                     workout.title,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: Theme.of(context).textTheme.bodyLarge,
+                    // const TextStyle(
+                    //   fontSize: 20,
+                    //   fontWeight: FontWeight.bold,
+                    // ),
                   ),
                   SizedBox(height: 3),
                   Card(
@@ -36,10 +37,11 @@ class WorkoutCard extends StatelessWidget {
                       padding: const EdgeInsets.all(5.0),
                       child: Text(
                         workout.category.name.toUpperCase(),
-                        style: TextStyle(
-                          color: workout.getCategoryColor(),
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Theme.of(context).textTheme.bodySmall,
+                        // TextStyle(
+                        //   color: workout.getCategoryColor(),
+                        //   fontWeight: FontWeight.bold,
+                        // ),
                       ),
                     ),
                   ),

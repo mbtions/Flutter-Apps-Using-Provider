@@ -11,8 +11,12 @@ final ThemeData myAppTheme = ThemeData().copyWith(
   ),
   colorScheme: ColorScheme.fromSwatch().copyWith(secondary: AppColors.kPrimary),
   textTheme: const TextTheme(
-    bodyLarge: TextStyle(color: AppColors.kDarkTextColor, fontSize: 16),
-    bodyMedium: TextStyle(color: Colors.white70, fontSize: 14),
+    // bodyLarge: TextStyle(color: AppColors.kDarkTextColor, fontSize: 16),
+    // bodyMedium: TextStyle(color: Colors.white70, fontSize: 12),
+    // bodySmall: TextStyle(fontSize: 8),
+    // headlineLarge: TextStyle(fontSize: 22),
+    // headlineMedium: TextStyle(fontSize: 18),
+    // headlineSmall: TextStyle(fontSize: 14),
   ),
   iconTheme: const IconThemeData(color: AppColors.kDarkTextColor, size: 24),
   cardTheme: CardThemeData(
@@ -66,21 +70,6 @@ final ThemeData myAppTheme = ThemeData().copyWith(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
     ),
   ),
-
-  // dropdownMenuTheme: const DropdownMenuThemeData(
-  //   inputDecorationTheme: InputDecorationTheme(
-  //     enabledBorder: OutlineInputBorder(
-  //       borderRadius: BorderRadius.all(Radius.circular(10)),
-  //       borderSide: BorderSide(color: Colors.white, width: 1),
-  //     ),
-  //     focusedBorder: OutlineInputBorder(
-  //       borderRadius: BorderRadius.all(Radius.circular(10)),
-  //       borderSide: BorderSide(color: AppColors.kPrimary, width: 2),
-  //     ),
-  //     labelStyle: TextStyle(color: Colors.white),
-  //     // iconColor: Color(0xFFB76D68),
-  //   ),
-  // ),
   datePickerTheme: DatePickerThemeData(
     backgroundColor: AppColors.darkCard, // Main background
     surfaceTintColor: Colors.transparent, // Prevents unexpected color overlays

@@ -1,11 +1,10 @@
-import 'package:fitnesstrackerapp/providers/bmi_provider.dart';
-import 'package:fitnesstrackerapp/providers/summary_provider.dart';
-import 'package:fitnesstrackerapp/providers/workout_provider.dart';
-import 'package:fitnesstrackerapp/screens/home_screen.dart';
-import 'package:fitnesstrackerapp/theme/my_app_light_theme.dart';
-import 'package:fitnesstrackerapp/theme/my_app_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:fitnesstrackerapp/theme/my_app_theme.dart';
+import 'package:fitnesstrackerapp/screens/home_screen.dart';
+// import 'package:fitnesstrackerapp/theme/my_app_light_theme.dart';
 import 'package:provider/provider.dart';
+import 'package:fitnesstrackerapp/providers/workout_provider.dart';
+import 'package:fitnesstrackerapp/providers/bmi_provider.dart';
 
 void main() {
   runApp(const FitnessTrackerApp());

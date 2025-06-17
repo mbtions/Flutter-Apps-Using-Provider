@@ -93,16 +93,15 @@ class SummaryScreen extends StatelessWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10),
                           child: Image.asset(
-                            'assets/images/empty_workout.png',
+                            'assets/images/research.png',
                             width: double.infinity,
-                            height: 400,
                             fit: BoxFit.cover,
                           ),
                         ),
                         SizedBox(height: 20),
                         Text(
-                          'No workouts recorded yet.',
-                          style: TextStyle(fontSize: 24, color: Colors.white),
+                          'No records to summarize!',
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                       ],
                     ),
