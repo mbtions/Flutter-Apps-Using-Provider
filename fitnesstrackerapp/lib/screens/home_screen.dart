@@ -70,8 +70,8 @@ class HomeScreenState extends State<HomeScreen> {
                 ? Center(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 20,
-                        vertical: 20,
+                        horizontal: 8,
+                        vertical: 8,
                       ),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -81,7 +81,6 @@ class HomeScreenState extends State<HomeScreen> {
                             child: Image.asset(
                               'assets/images/empty_workout.png',
                               width: double.infinity,
-                              height: 400,
                               fit: BoxFit.cover,
                             ),
                           ),

@@ -16,6 +16,24 @@ class BmiScreenState extends State<BmiScreen> {
   TextEditingController heightController = TextEditingController();
   TextEditingController weightController = TextEditingController();
 
+  void _showDialogBox(String errorMessage) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Input Error'),
+          content: Text(errorMessage),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   Color _getCategoryColor(String category) {
     switch (category) {
       case 'Underweight':
@@ -78,23 +96,28 @@ class BmiScreenState extends State<BmiScreen> {
                     onPressed: () {
                       if (heightController.text.isEmpty ||
                           weightController.text.isEmpty) {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Text('Input Error'),
-                              content: Text(
-                                'Please enter both height and weight',
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () => Navigator.of(context).pop(),
-                                  child: Text('OK'),
-                                ),
-                              ],
-                            );
-                          },
+                        _showDialogBox('Please enter both height and weight');
+                        return;
+                      } else if (double.parse(
+                            heightController.text,
+                          ).isNegative ||
+                          double.parse(heightController.text).isNaN ||
+                          heightController.text.contains(
+                            "-",
+                          ) || // cannot contain unexpected characters or operators
+                          heightController.text.contains("/") ||
+                          heightController.text.contains(" ") ||
+                          double.parse(weightController.text).isNegative ||
+                          weightController.text.contains(
+                            "-",
+                          ) || // cannot contain unexpected characters or operators or spaces
+                          weightController.text.contains("/") ||
+                          weightController.text.contains(" ") ||
+                          double.parse(weightController.text).isNaN) {
+                        _showDialogBox(
+                          'Invalid input format: No negatives, spaces, or invalid operators(-, /) allowed',
                         );
+
                         return;
                       }
 
